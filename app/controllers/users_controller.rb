@@ -29,10 +29,6 @@ class UsersController < ApplicationController
 
   def login
     user = User.find_by(email: params[:email])
-    if user
-      render plain: user.password == params[:password]
-    else
-      render plain: "email \"#{params[:email]}\" does not exitst"
-    end
+    render plain: !!user && user.password == params[:password]
   end
 end
